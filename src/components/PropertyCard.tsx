@@ -23,8 +23,17 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
     ? 'bg-orange-500 hover:bg-orange-600' 
     : 'bg-cordoba-primary hover:bg-cordoba-secondary';
 
-  // Manejar caso donde la imagen_principal sea un dato base64 o una URL
-  const imageSrc = property.imagen_principal || '/placeholder.svg';
+  // Check if the image is a base64 string or URL
+  const isBase64Image = (str: string) => {
+    return str?.startsWith('data:image');
+  };
+
+  // Use provided image or placeholder
+  const imageSrc = property.imagen_principal 
+    ? (isBase64Image(property.imagen_principal) 
+      ? property.imagen_principal 
+      : property.imagen_principal) 
+    : '/placeholder.svg';
 
   return (
     <Card className="overflow-hidden h-full flex flex-col transition-all hover:shadow-lg">
