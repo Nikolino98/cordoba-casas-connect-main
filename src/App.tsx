@@ -7,7 +7,7 @@ import { Toaster } from '@/components/ui/toaster';
 import Index from "@/pages/Index";
 import Properties from "@/pages/Properties";
 import PropertyDetail from "@/pages/PropertyDetail";
-import About from "@/pages/About";
+// import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import Admin from "@/pages/Admin";
@@ -24,7 +24,7 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/propiedades" element={<Properties />} />
             <Route path="/propiedad/:id" element={<PropertyDetail />} />
-            <Route path="/sobre-nosotros" element={<About />} />
+            {/* <Route path="/sobre-nosotros" element={<About />} /> */}
             <Route path="/contacto" element={<Contact />} />
             <Route path="/admin" element={
               <AdminAuth>
