@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -71,8 +70,8 @@ const PropertyDetail = () => {
   
   // Obtener las imágenes de la propiedad
   const getImageList = (imageString: string | undefined) => {
-    if (!imageString) return [];
-    return imageString.split(',');
+    if (!imageString || imageString.trim() === '') return [];
+    return imageString.split(',').filter(img => img.trim() !== '');
   };
 
   if (isLoading) {
@@ -119,7 +118,7 @@ const PropertyDetail = () => {
   
   const images = getImageList(property.imagenes);
   const allImages = property.imagen_principal ? [property.imagen_principal, ...images] : images;
-  const features = property.caracteristicas ? property.caracteristicas.split(',') : [];
+  const features = property.caracteristicas ? property.caracteristicas.split(',').filter(f => f.trim() !== '') : [];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -147,7 +146,7 @@ const PropertyDetail = () => {
             
             <div className="flex items-center text-muted-foreground mb-4">
               <MapPin className="h-4 w-4 mr-1" />
-              <span>{property.direccion}, {property.zona}, {property.ciudad}</span>
+              <span>{property.direccion}, {property.zona || ''}, {property.ciudad}</span>
             </div>
             
             <p className="text-3xl font-bold text-cordoba-primary">
@@ -168,6 +167,11 @@ const PropertyDetail = () => {
                           src={img} 
                           alt={`${property.titulo} - Imagen ${index + 1}`}
                           className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null; // Evita bucles infinitos
+                            target.src = '/placeholder.svg';
+                          }}
                         />
                       </div>
                     </CarouselItem>
@@ -190,6 +194,11 @@ const PropertyDetail = () => {
                     src={img} 
                     alt={`${property.titulo} - Miniatura ${index + 1}`}
                     className="w-full h-full object-cover transition-transform cursor-pointer hover:scale-105"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = '/placeholder.svg';
+                    }}
                   />
                 </div>
               ))}
@@ -199,6 +208,11 @@ const PropertyDetail = () => {
                     src={allImages[5]} 
                     alt={`${property.titulo} - Más imágenes`}
                     className="w-full h-full object-cover opacity-70"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = '/placeholder.svg';
+                    }}
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-bold">
                     +{allImages.length - 5}
@@ -225,7 +239,7 @@ const PropertyDetail = () => {
                     </div>
                   )}
                   
-                  {property.habitaciones !== null && property.habitaciones !== undefined && (
+                  {property.habitaciones !== null && property.habitaciones !== undefined && property.habitaciones > 0 && (
                     <div className="flex items-center">
                       <BedDouble className="h-5 w-5 mr-2 text-cordoba-primary" />
                       <div>
@@ -235,7 +249,7 @@ const PropertyDetail = () => {
                     </div>
                   )}
                   
-                  {property.baños !== null && property.baños !== undefined && (
+                  {property.baños !== null && property.baños !== undefined && property.baños > 0 && (
                     <div className="flex items-center">
                       <Bath className="h-5 w-5 mr-2 text-cordoba-primary" />
                       <div>
@@ -245,7 +259,7 @@ const PropertyDetail = () => {
                     </div>
                   )}
                   
-                  {property.superficie_total && (
+                  {property.superficie_total !== null && property.superficie_total !== undefined && property.superficie_total > 0 && (
                     <div className="flex items-center">
                       <Square className="h-5 w-5 mr-2 text-cordoba-primary" />
                       <div>
@@ -255,7 +269,7 @@ const PropertyDetail = () => {
                     </div>
                   )}
                   
-                  {property.superficie_cubierta && (
+                  {property.superficie_cubierta !== null && property.superficie_cubierta !== undefined && property.superficie_cubierta > 0 && (
                     <div className="flex items-center">
                       <Square className="h-5 w-5 mr-2 text-cordoba-primary" />
                       <div>
@@ -265,7 +279,7 @@ const PropertyDetail = () => {
                     </div>
                   )}
                   
-                  {property.año_construccion && (
+                  {property.año_construccion !== null && property.año_construccion !== undefined && property.año_construccion > 0 && (
                     <div className="flex items-center">
                       <Calendar className="h-5 w-5 mr-2 text-cordoba-primary" />
                       <div>
@@ -301,7 +315,7 @@ const PropertyDetail = () => {
                   {/* Here would be a map, but we're just showing a placeholder for now */}
                   <div className="w-full h-full flex items-center justify-center text-gray-500">
                     <MapPin className="h-8 w-8 mr-2" />
-                    <span>{property.direccion}, {property.zona}, {property.ciudad}</span>
+                    <span>{property.direccion}, {property.zona || ''}, {property.ciudad}</span>
                   </div>
                 </div>
               </div>

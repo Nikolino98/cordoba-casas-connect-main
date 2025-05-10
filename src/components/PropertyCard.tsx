@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -24,13 +23,21 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
     ? 'bg-orange-500 hover:bg-orange-600' 
     : 'bg-cordoba-primary hover:bg-cordoba-secondary';
 
+  // Manejar caso donde la imagen_principal sea un dato base64 o una URL
+  const imageSrc = property.imagen_principal || '/placeholder.svg';
+
   return (
     <Card className="overflow-hidden h-full flex flex-col transition-all hover:shadow-lg">
       <div className="relative aspect-video overflow-hidden">
         <img 
-          src={property.imagen_principal || '/placeholder.svg'} 
+          src={imageSrc} 
           alt={property.titulo}
           className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null; // Evita bucles infinitos
+            target.src = '/placeholder.svg';
+          }}
         />
         <Badge className={`absolute top-2 right-2 ${operationBadge}`}>
           {property.operacion === 'venta' ? 'Venta' : 'Alquiler'}
@@ -49,7 +56,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
         </Link>
         <div className="flex items-center text-muted-foreground text-sm">
           <MapPin className="h-3 w-3 mr-1" />
-          <span className="line-clamp-1">{property.zona}, {property.ciudad}</span>
+          <span className="line-clamp-1">{property.zona || ''}, {property.ciudad}</span>
         </div>
       </CardHeader>
       
@@ -63,21 +70,21 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
         </p>
         
         <div className="flex flex-wrap items-center gap-3 text-sm">
-          {property.habitaciones && (
+          {property.habitaciones !== null && property.habitaciones !== undefined && property.habitaciones > 0 && (
             <div className="flex items-center">
               <BedDouble className="h-4 w-4 mr-1 text-muted-foreground" />
               <span>{property.habitaciones} {property.habitaciones === 1 ? 'Hab' : 'Habs'}</span>
             </div>
           )}
           
-          {property.baños && (
+          {property.baños !== null && property.baños !== undefined && property.baños > 0 && (
             <div className="flex items-center">
               <Bath className="h-4 w-4 mr-1 text-muted-foreground" />
               <span>{property.baños} {property.baños === 1 ? 'Baño' : 'Baños'}</span>
             </div>
           )}
           
-          {property.superficie_total && (
+          {property.superficie_total !== null && property.superficie_total !== undefined && property.superficie_total > 0 && (
             <div className="flex items-center">
               <Square className="h-4 w-4 mr-1 text-muted-foreground" />
               <span>{property.superficie_total}m²</span>

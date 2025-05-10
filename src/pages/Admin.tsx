@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { 
@@ -207,7 +206,7 @@ const Admin = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Preparar las imágenes
+    // Preparar las imágenes - Asegurarse que sean URLs válidas
     const allImagesAsString = images.join(',');
     
     // Preparar las características
@@ -239,10 +238,10 @@ const Admin = () => {
     
     // Preparar imágenes
     setMainImage(property.imagen_principal || '');
-    setImages(property.imagenes ? property.imagenes.split(',') : []);
+    setImages(property.imagenes ? property.imagenes.split(',').filter(img => img.trim() !== '') : []);
     
     // Preparar características
-    setCharacteristicsList(property.caracteristicas ? property.caracteristicas.split(',') : []);
+    setCharacteristicsList(property.caracteristicas ? property.caracteristicas.split(',').filter(c => c.trim() !== '') : []);
     
     setOpenDialog(true);
   };
@@ -609,6 +608,7 @@ const Admin = () => {
                   {/* Imágenes */}
                   <div className="space-y-4">
                     <h3 className="text-lg font-medium">Imágenes (máx. 10)</h3>
+                    <p className="text-sm text-gray-500">Las imágenes se guardarán en formato base64. Para mejor rendimiento, utiliza imágenes optimizadas de tamaño moderado.</p>
                     
                     <div className="space-y-2">
                       <Label htmlFor="images">Subir Imágenes</Label>
