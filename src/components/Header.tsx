@@ -33,7 +33,7 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-6">
             <Link to="/" className="hover:text-gray-200 transition-colors">Inicio</Link>
             <Link to="/propiedades" className="hover:text-gray-200 transition-colors">Propiedades</Link>
-            <Link to="/about" className="hover:text-gray-200 transition-colors">Nosotros</Link>
+            {/* <Link to="/about" className="hover:text-gray-200 transition-colors">Nosotros</Link> */}
             <Link to="/contacto" className="hover:text-gray-200 transition-colors">Contacto</Link>
             <Button className="bg-white text-cordoba-primary hover:bg-gray-100" asChild>
               <Link to="/admin">

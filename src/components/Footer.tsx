@@ -39,7 +39,7 @@ const Footer = () => {
                 <Link to="/propiedades" className="text-gray-300 hover:text-white transition-colors">Propiedades</Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-300 hover:text-white transition-colors">Nosotros</Link>
+                {/* <Link to="/about" className="text-gray-300 hover:text-white transition-colors">Nosotros</Link> */}
               </li>
               <li>
                 <Link to="/contacto" className="text-gray-300 hover:text-white transition-colors">Contacto</Link>
@@ -67,7 +67,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Córdoba Casas. Todos los derechos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} Córdoba Casas. Todos los derechos reservados. Nicolas Perez.</p>
         </div>
       </div>
     </footer>
