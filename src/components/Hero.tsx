@@ -45,7 +45,7 @@ const Hero = () => {
       {/* Overlay con imagen de fondo */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="\public\images\hero-bg.jpg" 
+          src="/public/images/hero-bg.jpg" 
           alt="Propiedades en Córdoba" 
           className="w-full h-full object-cover opacity-40"
         />
