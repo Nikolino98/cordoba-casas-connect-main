@@ -12,6 +12,8 @@ import {
 } from '@/components/ui/select';
 import { useNavigate } from 'react-router-dom';
 
+import image from '/public/images/hero-bg.jpg'
+
 const Hero = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = React.useState({
@@ -45,7 +47,7 @@ const Hero = () => {
       {/* Overlay con imagen de fondo */}
       <div className="absolute inset-0 z-0">
         <img 
-          src='./public/images/hero-bg.jpg' 
+          src={image} 
           alt="Propiedades en Córdoba" 
           className="w-full h-full object-cover opacity-40"
         />
