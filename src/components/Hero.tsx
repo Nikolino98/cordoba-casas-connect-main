@@ -45,7 +45,7 @@ const Hero = () => {
       {/* Overlay con imagen de fondo */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/images/hero-bg.jpg" 
+          src="\public\images\hero-bg.jpg" 
           alt="Propiedades en Córdoba" 
           className="w-full h-full object-cover opacity-40"
         />
@@ -57,7 +57,7 @@ const Hero = () => {
             Encontrá tu lugar ideal en Córdoba
           </h1>
           <p className="text-xl text-gray-200 mb-8">
-            Las mejores opciones para comprar, vender o alquilar tu propiedad
+            Las mejores opciones para comprar, vender o alquilar tu hogar
           </p>
 
           <div className="bg-white p-6 rounded-lg shadow-lg">
