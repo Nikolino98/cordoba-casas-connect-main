@@ -9,7 +9,7 @@ import {
   SelectTrigger, 
   SelectValue 
 } from '@/components/ui/select';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 // URL de la imagen de fondo por defecto desde Unsplash
 const DEFAULT_BACKGROUND_IMAGE = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80";
@@ -123,10 +123,10 @@ const Hero = () => {
             </form>
             
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 text-sm">
-              <a href="/propiedades?tipo=casa" className="text-cordoba-primary hover:underline">Casas en venta</a>
-              <a href="/propiedades?tipo=departamento" className="text-cordoba-primary hover:underline">Departamentos en alquiler</a>
-              <a href="/propiedades?tipo=terreno" className="text-cordoba-primary hover:underline">Terrenos</a>
-              <a href="/propiedades?tipo=oficina" className="text-cordoba-primary hover:underline">Oficinas</a>
+              <Link to="/propiedades?operacion=venta&tipo=casa" className="text-cordoba-primary hover:underline">Casas en venta</Link>
+              <Link to="/propiedades?operacion=alquiler&tipo=departamento" className="text-cordoba-primary hover:underline">Departamentos en alquiler</Link>
+              <Link to="/propiedades?tipo=terreno" className="text-cordoba-primary hover:underline">Terrenos</Link>
+              <Link to="/propiedades?ciudad=cordoba&zona=nueva-cordoba" className="text-cordoba-primary hover:underline">Nueva Córdoba</Link>
             </div>
           </div>
         </div>
