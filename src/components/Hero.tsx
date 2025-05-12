@@ -56,19 +56,20 @@ const Hero = () => {
   return (
     <div className="relative bg-cordoba-dark overflow-hidden">
       {/* Overlay con imagen de fondo */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 animate-subtle-zoom ">
         <img 
-          src={imageError ? backgroundImage : "/images/hero-bg.jpg"} 
+          src={imageError ? backgroundImage : "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80, )"} 
           alt="Propiedades en Córdoba" 
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover "
           onError={handleImageError}
+          style={{filter: 'brightness(.7)'}}
         />
       </div>
       
-      <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Encontrá tu lugar ideal en Córdoba
+      <div className="relative container mx-auto px-4 pt-36 pb-52 flex flex-col items-start">
+        <div className="max-w-2xl animate-fade-in">
+          <h1 className="text-white mb-6 text-5xl md:text-6xl font-bold tracking-tight leading-tight">
+            Encuentra tu <span className="text-primary italic font-semibold bg-gradient-to-b from-primary to-blue-400 bg-clip-text text-transparent">hogar ideal</span> en Córdoba
           </h1>
           <p className="text-xl text-gray-200 mb-8">
             Las mejores opciones para comprar, vender o alquilar tu propiedad
@@ -116,18 +117,12 @@ const Hero = () => {
                 </Select>
               </div>
               
-              <Button type="submit" className="w-full bg-cordoba-primary hover:bg-cordoba-secondary">
+              <Button type="submit" className="rounded-full font-medium shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all container">
                 <Search className="h-4 w-4 mr-2" />
                 Buscar propiedades
               </Button>
             </form>
-            
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 text-sm">
-              <Link to="/propiedades?operacion=venta&tipo=casa" className="text-cordoba-primary hover:underline">Casas en venta</Link>
-              <Link to="/propiedades?operacion=alquiler&tipo=departamento" className="text-cordoba-primary hover:underline">Departamentos en alquiler</Link>
-              <Link to="/propiedades?tipo=terreno" className="text-cordoba-primary hover:underline">Terrenos</Link>
-              <Link to="/propiedades?ciudad=cordoba&zona=nueva-cordoba" className="text-cordoba-primary hover:underline">Nueva Córdoba</Link>
-            </div>
+
           </div>
         </div>
       </div>
