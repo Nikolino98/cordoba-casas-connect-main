@@ -149,8 +149,8 @@ const Properties = () => {
               <div className="pt-6 px-2">
                 <Slider 
                   defaultValue={[filters.precioMin, filters.precioMax]} 
-                  max={100000000} 
-                  step={100000} 
+                  max={10000000} 
+                  step={10000} 
                   value={priceRange}
                   onValueChange={handlePriceRangeChange}
                 />
