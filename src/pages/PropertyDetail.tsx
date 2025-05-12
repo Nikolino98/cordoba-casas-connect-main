@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { 
@@ -25,6 +25,12 @@ import {
 
 const PropertyDetail = () => {
   const { id } = useParams<{ id: string }>();
+
+    
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   const { data: property, isLoading, error } = useQuery({
     queryKey: ['property', id],
