@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,7 +11,8 @@ import {
 } from '@/components/ui/select';
 import { useNavigate } from 'react-router-dom';
 
-import image from '/public/images/hero-bg.jpg'
+// URL de la imagen de fondo por defecto desde Unsplash
+const DEFAULT_BACKGROUND_IMAGE = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -21,6 +21,10 @@ const Hero = () => {
     operacion: 'todas',
     tipo: 'todos'
   });
+  
+  // Estado para manejar errores de carga de imagen
+  const [backgroundImage, setBackgroundImage] = useState(DEFAULT_BACKGROUND_IMAGE);
+  const [imageError, setImageError] = useState(false);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,14 +46,22 @@ const Hero = () => {
     navigate(`/propiedades?${params.toString()}`);
   };
 
+  // Función para manejar errores de carga de imagen
+  const handleImageError = () => {
+    console.log("Error al cargar la imagen de fondo, usando imagen por defecto");
+    setImageError(true);
+    setBackgroundImage(DEFAULT_BACKGROUND_IMAGE);
+  };
+
   return (
     <div className="relative bg-cordoba-dark overflow-hidden">
       {/* Overlay con imagen de fondo */}
       <div className="absolute inset-0 z-0">
         <img 
-          src={image} 
+          src={imageError ? backgroundImage : "/images/hero-bg.jpg"} 
           alt="Propiedades en Córdoba" 
           className="w-full h-full object-cover opacity-40"
+          onError={handleImageError}
         />
       </div>
       
@@ -59,7 +71,7 @@ const Hero = () => {
             Encontrá tu lugar ideal en Córdoba
           </h1>
           <p className="text-xl text-gray-200 mb-8">
-            Las mejores opciones para comprar, vender o alquilar tu hogar
+            Las mejores opciones para comprar, vender o alquilar tu propiedad
           </p>
 
           <div className="bg-white p-6 rounded-lg shadow-lg">
