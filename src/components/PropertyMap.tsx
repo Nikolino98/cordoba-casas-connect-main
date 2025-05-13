@@ -19,7 +19,7 @@ const PropertyMap: React.FC<PropertyMapProps> = ({ lat, lng, address }) => {
   };
 
   return (
-    <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
+    <LoadScript googleMapsApiKey="AIzaSyBBPwyL47ND8SaegBYkaX6omKeN4p3VylE">
       <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={15}
