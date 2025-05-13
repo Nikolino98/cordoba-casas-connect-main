@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface NavbarProps {
   className?: string;
@@ -29,9 +30,9 @@ const Navbar = ({ className }: NavbarProps) => {
   };
 
   const navItems = [
-    { label: "Inicio", href: "/" },
-    { label: "Propiedades", href: "/propiedades" },
-    { label: "ADMIN", href: "/admin"},
+    { label: "Inicio", to: "/" },
+    { label: "Propiedades", to: "/propiedades" },
+    { label: "ADMIN", to: "/admin" },
   ];
 
   return (
@@ -48,22 +49,22 @@ const Navbar = ({ className }: NavbarProps) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="text-2xl font-bold text-blue-900">
+            <Link to="/" className="text-2xl font-bold text-blue-900">
               Córdoba Casas
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.label}
-                  href={item.href}
+                  to={item.to}
                   className="text-gray-800 hover:text-blue-900 px-3 py-1 rounded-md text-sm font-medium transition-colors "
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -95,14 +96,14 @@ const Navbar = ({ className }: NavbarProps) => {
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={item.to}
               className="text-gray-800 hover:text-blue-900 block px-3 py-2 rounded-md text-base font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>
